@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>memo</title>
+    <script>
+      // 描画前にテーマを決めてちらつきを防ぐ（本体はsrc/theme.ts）
+      (function () {
+        var pref = 'system';
+        try {
+          pref = localStorage.getItem('memo-theme') || 'system';
+        } catch (e) {}
+        var dark = pref === 'dark' || (pref !== 'light' && matchMedia('(prefers-color-scheme: dark)').matches);
+        document.documentElement.dataset.theme = dark ? 'dark' : 'light';
+        // カラー・フォント（src/appearance.tsが書いたCSS変数）
+        try {
+          var vars = JSON.parse(localStorage.getItem('memo-appearance-vars') || '{}');
+          for (var k in vars) document.documentElement.style.setProperty(k, vars[k]);
+        } catch (e) {}
+      })();
+    </script>
+    <script type="module" crossorigin src="./assets/index-Citfkntd.js"></script>
+    <link rel="modulepreload" crossorigin href="./assets/rolldown-runtime-COiEfhsA.js">
+    <link rel="stylesheet" crossorigin href="./assets/index-Dy0QjNSR.css">
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
+</html>
